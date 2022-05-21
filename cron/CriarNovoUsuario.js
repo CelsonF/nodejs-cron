@@ -2,7 +2,7 @@ const cron = require("node-cron");
 const { axiosFreshteam, axiosPipedrive } = require("../services/api");
 
 async function CriarNovoUsuario() {
-  console.log("CriarNovoUsuario");
+  console.log("Criando novos usuários");
 
   const { data } = await axiosFreshteam.get("/new_hires");
 
@@ -14,7 +14,7 @@ async function CriarNovoUsuario() {
         active_flag: true,
       })
       .then(function (response) {
-        console.log(response);
+        console.log("Finalizando criação de novos usuários");
       })
       .catch(function (error) {
         console.log(error);
