@@ -7,14 +7,15 @@ async function CriarNovoUsuario() {
   const { data } = await axiosFreshteam.get("/new_hires");
 
   data.map(async (newHire) => {
+    const name = `${newHire.first_name} ${newHire.last_name}`;
     await axiosPipedrive
       .post("/users", {
-        name: `${newHire.first_name} ${newHire.last_name}`,
+        name,
         email: newHire.official_email,
         active_flag: true,
       })
       .then(function (response) {
-        console.log("Finalizando criação de novos usuários");
+        console.log(`Usuário ${name} criado com sucesso`);
       })
       .catch(function (error) {
         console.log(error);
