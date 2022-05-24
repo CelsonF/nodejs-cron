@@ -6,21 +6,25 @@ async function CriarNovoUsuario() {
 
   const { data } = await axiosFreshteam.get("/new_hires");
 
-  data.map(async (newHire) => {
-    const name = `${newHire.first_name} ${newHire.last_name}`;
-    await axiosPipedrive
-      .post("/users", {
-        name,
-        email: newHire.official_email,
-        active_flag: true,
-      })
-      .then(function (response) {
-        console.log(`Usuário ${name} criado com sucesso`);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  });
+  if (data.length <= 0) {
+    return console.log("Nenhum novo usuário foi encontrado");
+  } else {
+    return data.map(async (newHire) => {
+      const name = `${newHire.first_name} ${newHire.last_name}`;
+      await axiosPipedrive
+        .post("/users", {
+          name,
+          email: newHire.official_email,
+          active_flag: true,
+        })
+        .then(function (response) {
+          console.log(`Usuário ${name} criado com sucesso`);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    });
+  }
 }
 
 module.exports = cron.schedule("*/1 * * * *", CriarNovoUsuario, {

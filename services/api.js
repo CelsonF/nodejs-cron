@@ -1,16 +1,17 @@
 const axios = require("axios");
+require("dotenv").config();
 
 const axiosFreshteam = axios.create({
-  baseURL: "https://viniciusalexsander11.freshteam.com/api/",
+  baseURL: process.env.FRESHTEAM_URL,
   headers: {
-    Authorization: "Bearer NfHyK6lS86hLS7hy9ekTrw",
+    Authorization: `Bearer ${process.env.FRESHTEAM_API_TOKEN}`,
   },
 });
 
 const axiosPipedrive = axios.create({
-  baseURL: "https://testandotrabalho.pipedrive.com/v1",
+  baseURL: process.env.PIPEDRIVE_URL,
   params: {
-    api_token: "bed21e6bea89b40851ddbbc4b1a7f0fea79f6a1b",
+    api_token: process.env.PIPEDRIVE_API_TOKEN,
   },
 });
 

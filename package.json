@@ -5,6 +5,7 @@
   "license": "MIT",
   "dependencies": {
     "axios": "^0.27.2",
+    "dotenv": "^16.0.1",
     "express": "^4.17.1",
     "node-cron": "^3.0.0"
   }
